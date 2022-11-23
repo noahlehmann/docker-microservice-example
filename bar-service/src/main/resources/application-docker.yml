@@ -1,6 +1,6 @@
 spring:
   application:
-    name: foo-service
+    name: bar-service
   datasource:
     url: jdbc:h2:mem:mydb
     username: sa
@@ -14,11 +14,11 @@ spring:
     defer-datasource-initialization: true
 
 server:
-  port: 9010
+  port: 9020
   servlet:
-    context-path: /foo
+    context-path: /bar
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:9999/eureka
+      defaultZone: http://eureka:9999/eureka
