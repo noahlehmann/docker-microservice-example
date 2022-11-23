@@ -1,0 +1,6 @@
+FROM maven:3-openjdk-17-slim
+
+WORKDIR /opt/code
+COPY . .
+EXPOSE 5005
+RUN mvn clean package -DSkiptests
