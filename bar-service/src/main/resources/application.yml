@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: bar-service
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+
+server:
+  port: 9020
+  servlet:
+    context-path: /bar
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka

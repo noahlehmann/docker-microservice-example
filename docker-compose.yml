@@ -1,0 +1,35 @@
+services:
+  reverse-proxy:
+    image: nginx:1.23
+    expose:
+      - "80"
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy/nginx/nginx.local.conf:/etc/nginx/nginx.conf
+
+  webapp:
+    build:
+      context: ../webapp
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ../webapp:/usr/src/app/app-ui
+      - /usr/src/app/app-ui/node_modules
+
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile_lokal-services
+    ports:
+      - "9000:9000"
+    command: java -Dspring.profiles.active="docker" -jar gateway-service/target/gateway-service-1.0-SNAPSHOT.jar
+
+  eureka:
+    build:
+      context: .
+      dockerfile: Dockerfile_lokal-services
+    ports:
+      - "9999:9999"
+    command: java -jar -Dspring.profiles.active="docker" eureka-service/target/eureka-service-1.0-SNAPSHOT.jar
